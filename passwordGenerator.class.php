@@ -39,7 +39,7 @@ class passwordGenerator {
     $i=1;
     print  "<pre style=\"white-space: pre-wrap;\">\n";
     foreach ($this->passwords as $pair){
-      print ($i<10 ? "0" . $i: $i) . " " . $pair['password'] . " " . $pair['sentence'] . "\n";
+      print "<strong>" . ($i<10 ? "0" . $i: $i) . "</strong> " . $pair['password'] . " " . $pair['sentence'] . "\n";
       $i++;
     }
     print "</pre>\n";
@@ -187,16 +187,16 @@ class passwordGenerator {
      $this->passwords[$i]['password'] = htmlspecialchars($this->passwords[$i]['password']);
     }
   }
-  function highlight () {
+  function highlight ($highlighter_s = "_",$highlighter_f = "_") {
     for ($i = 0; $i < count($this->passwords); $i++) {
      $sentence = $this->passwords[$i]['sentence'];
      $words = explode(" ", $sentence);
      for ($j = 0; $j < count($words); $j++) {
        if (preg_match('/^[0-9]+$/', $words[$j])) {
-         $words[$j] = "_" . $words[$j] . "_";
+         $words[$j] = $highlighter_s . $words[$j] . $highlighter_f;
        } else {
-         $words[$j] = mb_substr($words[$j], 0, 3)."_".mb_substr($words[$j], 3);
-         $words[$j] = "_" . $words[$j];
+         $words[$j] = mb_substr($words[$j], 0, 3).$highlighter_f.mb_substr($words[$j], 3);
+         $words[$j] = $highlighter_s . $words[$j];
        }
      }
      $this->passwords[$i]['sentence'] = implode(" ", $words);
