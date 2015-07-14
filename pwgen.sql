@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Хост: localhost
--- Время создания: Июл 13 2015 г., 21:52
+-- Время создания: Июл 14 2015 г., 15:25
 -- Версия сервера: 5.6.20
 -- Версия PHP: 5.5.15
 
@@ -26,6 +26,8 @@ USE `pwgen`;
 
 --
 -- Структура таблицы `attrib`
+--
+-- Создание: Июл 09 2015 г., 15:41
 --
 
 DROP TABLE IF EXISTS `attrib`;
@@ -975,8 +977,7 @@ INSERT INTO `attrib` (`word`, `ps`, `g`, `ps_type`, `case`, `alt_case`, `id`) VA
 ('видимых', 'p', 'm', 1, 'nom', 'acc', 929),
 ('видимых', 'p', '-', 2, 'nom', 'acc', 930),
 ('видная', 's', 'f', 0, 'nom', 'nom', 931),
-('видного', 's', 'm', 0, 'acc', 'acc', 932);
-INSERT INTO `attrib` (`word`, `ps`, `g`, `ps_type`, `case`, `alt_case`, `id`) VALUES
+('видного', 's', 'm', 0, 'acc', 'acc', 932),
 ('видную', 's', 'f', 0, 'acc', 'acc', 933),
 ('видный', 's', 'm', 0, 'nom', 'nom', 934),
 ('видный', 's', 'm', 0, 'acc', 'nom', 935),
@@ -1896,8 +1897,7 @@ INSERT INTO `attrib` (`word`, `ps`, `g`, `ps_type`, `case`, `alt_case`, `id`) VA
 ('догадливый', 's', 'm', 0, 'nom', 'nom', 1849),
 ('догадливый', 's', 'm', 0, 'acc', 'nom', 1850),
 ('догадливых', 'p', 'm', 1, 'nom', 'acc', 1851),
-('догадливых', 'p', '-', 2, 'nom', 'acc', 1852);
-INSERT INTO `attrib` (`word`, `ps`, `g`, `ps_type`, `case`, `alt_case`, `id`) VALUES
+('догадливых', 'p', '-', 2, 'nom', 'acc', 1852),
 ('долговязая', 's', 'f', 0, 'nom', 'nom', 1853),
 ('долговязого', 's', 'm', 0, 'acc', 'acc', 1854),
 ('долговязое', 's', 'n', 0, 'acc', 'nom', 1855),
@@ -2823,8 +2823,7 @@ INSERT INTO `attrib` (`word`, `ps`, `g`, `ps_type`, `case`, `alt_case`, `id`) VA
 ('испытанный', 's', 'm', 0, 'acc', 'nom', 2775),
 ('испытанных', 'p', 'm', 1, 'nom', 'acc', 2776),
 ('испытанных', 'p', '-', 2, 'nom', 'acc', 2777),
-('исходная', 's', 'f', 0, 'nom', 'nom', 2778);
-INSERT INTO `attrib` (`word`, `ps`, `g`, `ps_type`, `case`, `alt_case`, `id`) VALUES
+('исходная', 's', 'f', 0, 'nom', 'nom', 2778),
 ('исходного', 's', 'm', 0, 'acc', 'acc', 2779),
 ('исходную', 's', 'f', 0, 'acc', 'acc', 2780),
 ('исходный', 's', 'm', 0, 'nom', 'nom', 2781),
@@ -3760,8 +3759,7 @@ INSERT INTO `attrib` (`word`, `ps`, `g`, `ps_type`, `case`, `alt_case`, `id`) VA
 ('маленьких', 'p', 'm', 1, 'nom', 'acc', 3711),
 ('маленьких', 'p', '-', 2, 'nom', 'acc', 3712),
 ('маленького', 's', 'm', 0, 'acc', 'acc', 3713),
-('маленькую', 's', 'f', 0, 'acc', 'acc', 3714);
-INSERT INTO `attrib` (`word`, `ps`, `g`, `ps_type`, `case`, `alt_case`, `id`) VALUES
+('маленькую', 's', 'f', 0, 'acc', 'acc', 3714),
 ('малиновая', 's', 'f', 0, 'nom', 'nom', 3715),
 ('малинового', 's', 'm', 0, 'acc', 'acc', 3716),
 ('малиновое', 's', 'n', 0, 'acc', 'nom', 3717),
@@ -4676,8 +4674,7 @@ INSERT INTO `attrib` (`word`, `ps`, `g`, `ps_type`, `case`, `alt_case`, `id`) VA
 ('овальных', 'p', '-', 2, 'nom', 'acc', 4626),
 ('огромная', 's', 'f', 0, 'nom', 'nom', 4627),
 ('огромного', 's', 'm', 0, 'acc', 'acc', 4628),
-('огромную', 's', 'f', 0, 'acc', 'acc', 4629);
-INSERT INTO `attrib` (`word`, `ps`, `g`, `ps_type`, `case`, `alt_case`, `id`) VALUES
+('огромную', 's', 'f', 0, 'acc', 'acc', 4629),
 ('огромные', 'p', 'f', 1, 'nom', 'nom', 4630),
 ('огромный', 's', 'm', 0, 'nom', 'nom', 4631),
 ('огромный', 's', 'm', 0, 'acc', 'nom', 4632),
@@ -5585,8 +5582,7 @@ INSERT INTO `attrib` (`word`, `ps`, `g`, `ps_type`, `case`, `alt_case`, `id`) VA
 ('порядочное', 's', 'n', 0, 'acc', 'nom', 5534),
 ('порядочную', 's', 'f', 0, 'acc', 'acc', 5535),
 ('порядочные', 'p', 'f', 1, 'nom', 'nom', 5536),
-('порядочный', 's', 'm', 0, 'nom', 'nom', 5537);
-INSERT INTO `attrib` (`word`, `ps`, `g`, `ps_type`, `case`, `alt_case`, `id`) VALUES
+('порядочный', 's', 'm', 0, 'nom', 'nom', 5537),
 ('порядочный', 's', 'm', 0, 'acc', 'nom', 5538),
 ('порядочных', 'p', 'm', 1, 'nom', 'acc', 5539),
 ('порядочных', 'p', '-', 2, 'nom', 'acc', 5540),
@@ -6519,8 +6515,7 @@ INSERT INTO `attrib` (`word`, `ps`, `g`, `ps_type`, `case`, `alt_case`, `id`) VA
 ('скверный', 's', 'm', 0, 'nom', 'nom', 6468),
 ('скверный', 's', 'm', 0, 'acc', 'nom', 6469),
 ('скверных', 'p', 'm', 1, 'nom', 'acc', 6470),
-('скверных', 'p', '-', 2, 'nom', 'acc', 6471);
-INSERT INTO `attrib` (`word`, `ps`, `g`, `ps_type`, `case`, `alt_case`, `id`) VALUES
+('скверных', 'p', '-', 2, 'nom', 'acc', 6471),
 ('складная', 's', 'f', 0, 'nom', 'nom', 6472),
 ('складного', 's', 'm', 0, 'acc', 'acc', 6473),
 ('складной', 's', 'm', 0, 'nom', 'nom', 6474),
@@ -7451,8 +7446,7 @@ INSERT INTO `attrib` (`word`, `ps`, `g`, `ps_type`, `case`, `alt_case`, `id`) VA
 ('улыбчивый', 's', 'm', 0, 'acc', 'nom', 7399),
 ('улыбчивых', 'p', 'm', 1, 'nom', 'acc', 7400),
 ('улыбчивых', 'p', '-', 2, 'nom', 'acc', 7401),
-('умелая', 's', 'f', 0, 'nom', 'nom', 7402);
-INSERT INTO `attrib` (`word`, `ps`, `g`, `ps_type`, `case`, `alt_case`, `id`) VALUES
+('умелая', 's', 'f', 0, 'nom', 'nom', 7402),
 ('умелого', 's', 'm', 0, 'acc', 'acc', 7403),
 ('умелую', 's', 'f', 0, 'acc', 'acc', 7404),
 ('умелые', 'p', 'f', 1, 'nom', 'nom', 7405),
@@ -8283,6 +8277,8 @@ INSERT INTO `attrib` (`word`, `ps`, `g`, `ps_type`, `case`, `alt_case`, `id`) VA
 --
 -- Структура таблицы `object`
 --
+-- Создание: Июл 09 2015 г., 15:41
+--
 
 DROP TABLE IF EXISTS `object`;
 CREATE TABLE IF NOT EXISTS `object` (
@@ -8383,7 +8379,7 @@ INSERT INTO `object` (`word`, `ps`, `g`, `case`, `alt_case`, `id`) VALUES
 ('белку', 's', 'f', 'acc', 'acc', 82),
 ('белугу', 's', 'f', 'acc', 'acc', 83),
 ('берданку', 's', 'f', 'acc', 'acc', 84),
-('бестолочь', 's', 'f', 'acc', 'nom', 85),
+('бестолочь', 's', 'f', 'acc', 'acc', 85),
 ('библиотекаря', 's', 'm', 'acc', 'acc', 86),
 ('бизона', 's', 'm', 'acc', 'acc', 87),
 ('биолога', 's', 'm', 'acc', 'acc', 88),
@@ -8431,7 +8427,7 @@ INSERT INTO `object` (`word`, `ps`, `g`, `case`, `alt_case`, `id`) VALUES
 ('бурундука', 's', 'm', 'acc', 'acc', 130),
 ('бутерброд', 's', 'm', 'acc', 'nom', 131),
 ('бутуза', 's', 'm', 'acc', 'acc', 132),
-('бутыль', 's', 'f', 'acc', 'nom', 133),
+('бутыль', 's', 'f', 'acc', 'acc', 133),
 ('буфетчика', 's', 'm', 'acc', 'acc', 134),
 ('бухгалтера', 's', 'm', 'acc', 'acc', 135),
 ('быка', 's', 'm', 'acc', 'acc', 136),
@@ -8501,7 +8497,7 @@ INSERT INTO `object` (`word`, `ps`, `g`, `case`, `alt_case`, `id`) VALUES
 ('выскочку', 's', 'm', 'acc', 'acc', 200),
 ('гадалку', 's', 'f', 'acc', 'acc', 201),
 ('гадюку', 's', 'f', 'acc', 'acc', 202),
-('газель', 's', 'f', 'acc', 'nom', 203),
+('газель', 's', 'f', 'acc', 'acc', 203),
 ('газосварщика', 's', 'm', 'acc', 'acc', 204),
 ('гайку', 's', 'f', 'acc', 'acc', 205),
 ('галету', 's', 'f', 'acc', 'acc', 206),
@@ -8578,7 +8574,7 @@ INSERT INTO `object` (`word`, `ps`, `g`, `case`, `alt_case`, `id`) VALUES
 ('дантиста', 's', 'm', 'acc', 'acc', 277),
 ('дармоеда', 's', 'm', 'acc', 'acc', 278),
 ('дачника', 's', 'm', 'acc', 'acc', 279),
-('дверь', 's', 'f', 'acc', 'nom', 280),
+('дверь', 's', 'f', 'acc', 'acc', 280),
 ('двоечника', 's', 'm', 'acc', 'acc', 281),
 ('дворецкого', 's', 'm', 'acc', 'acc', 282),
 ('двурушника', 's', 'm', 'acc', 'acc', 283),
@@ -8639,7 +8635,7 @@ INSERT INTO `object` (`word`, `ps`, `g`, `case`, `alt_case`, `id`) VALUES
 ('дровосека', 's', 'm', 'acc', 'acc', 338),
 ('дрозда', 's', 'm', 'acc', 'acc', 339),
 ('друга', 's', 'm', 'acc', 'acc', 340),
-('дрянь', 's', 'f', 'acc', 'nom', 341),
+('дрянь', 's', 'f', 'acc', 'acc', 341),
 ('дубину', 's', 'f', 'acc', 'acc', 342),
 ('дупло', 's', 'n', 'acc', 'nom', 343),
 ('дурака', 's', 'm', 'acc', 'acc', 344),
@@ -9061,7 +9057,7 @@ INSERT INTO `object` (`word`, `ps`, `g`, `case`, `alt_case`, `id`) VALUES
 ('плантатора', 's', 'm', 'acc', 'acc', 760),
 ('племянницу', 's', 'f', 'acc', 'acc', 761),
 ('пленника', 's', 'm', 'acc', 'acc', 762),
-('плесень', 's', 'f', 'acc', 'nom', 763),
+('плесень', 's', 'f', 'acc', 'acc', 763),
 ('плетень', 's', 'm', 'acc', 'nom', 764),
 ('пловчиху', 's', 'f', 'acc', 'acc', 765),
 ('плотника', 's', 'm', 'acc', 'acc', 766),
@@ -9203,7 +9199,7 @@ INSERT INTO `object` (`word`, `ps`, `g`, `case`, `alt_case`, `id`) VALUES
 ('сваю', 's', 'f', 'acc', 'acc', 902),
 ('свидетеля', 's', 'm', 'acc', 'acc', 903),
 ('свинарку', 's', 'f', 'acc', 'acc', 904),
-('свирель', 's', 'f', 'acc', 'nom', 905),
+('свирель', 's', 'f', 'acc', 'acc', 905),
 ('свояка', 's', 'm', 'acc', 'acc', 906),
 ('связиста', 's', 'm', 'acc', 'acc', 907),
 ('сдобу', 's', 'f', 'acc', 'acc', 908),
@@ -9338,8 +9334,7 @@ INSERT INTO `object` (`word`, `ps`, `g`, `case`, `alt_case`, `id`) VALUES
 ('уточку', 's', 'f', 'acc', 'acc', 1037),
 ('ухажера', 's', 'm', 'acc', 'acc', 1038),
 ('учащегося', 's', 'm', 'acc', 'acc', 1039),
-('ученика', 's', 'm', 'acc', 'acc', 1040);
-INSERT INTO `object` (`word`, `ps`, `g`, `case`, `alt_case`, `id`) VALUES
+('ученика', 's', 'm', 'acc', 'acc', 1040),
 ('учительницу', 's', 'f', 'acc', 'acc', 1041),
 ('фабриканта', 's', 'm', 'acc', 'acc', 1042),
 ('фаворита', 's', 'm', 'acc', 'acc', 1043),
@@ -9487,6 +9482,8 @@ INSERT INTO `object` (`word`, `ps`, `g`, `case`, `alt_case`, `id`) VALUES
 
 --
 -- Структура таблицы `predicate`
+--
+-- Создание: Июл 09 2015 г., 15:41
 --
 
 DROP TABLE IF EXISTS `predicate`;
@@ -10662,8 +10659,7 @@ INSERT INTO `predicate` (`word`, `ps`, `g`, `time`, `id`) VALUES
 ('критикует', 's', 'f', 'pres', 1157),
 ('критикует', 's', 'm', 'pres', 1158),
 ('критикуют', 'p', '-', 'pres', 1159),
-('кромсает', 's', 'f', 'pres', 1160);
-INSERT INTO `predicate` (`word`, `ps`, `g`, `time`, `id`) VALUES
+('кромсает', 's', 'f', 'pres', 1160),
 ('кромсает', 's', 'm', 'pres', 1161),
 ('кромсают', 'p', '-', 'pres', 1162),
 ('кружат', 'p', '-', 'pres', 1163),
@@ -11793,8 +11789,7 @@ INSERT INTO `predicate` (`word`, `ps`, `g`, `time`, `id`) VALUES
 ('рыхлит', 's', 'f', 'pres', 2287),
 ('рыхлит', 's', 'm', 'pres', 2288),
 ('рыхлят', 'p', '-', 'pres', 2289),
-('сажает', 's', 'f', 'pres', 2290);
-INSERT INTO `predicate` (`word`, `ps`, `g`, `time`, `id`) VALUES
+('сажает', 's', 'f', 'pres', 2290),
 ('сажает', 's', 'm', 'pres', 2291),
 ('сажают', 'p', '-', 'pres', 2292),
 ('сбагрил', 's', 'm', 'past', 2293),
@@ -12572,6 +12567,8 @@ INSERT INTO `predicate` (`word`, `ps`, `g`, `time`, `id`) VALUES
 
 --
 -- Структура таблицы `subject`
+--
+-- Создание: Июл 09 2015 г., 15:41
 --
 
 DROP TABLE IF EXISTS `subject`;
@@ -13705,8 +13702,7 @@ INSERT INTO `subject` (`word`, `ps`, `g`, `ps_type`, `case`, `id`) VALUES
 ('злодеев', 'p', 'm', 2, 'nom', 1114),
 ('злодей', 's', 'm', 0, 'nom', 1115),
 ('злодея', 'p', 'm', 1, 'nom', 1116),
-('злоумышленник', 's', 'm', 0, 'nom', 1117);
-INSERT INTO `subject` (`word`, `ps`, `g`, `ps_type`, `case`, `id`) VALUES
+('злоумышленник', 's', 'm', 0, 'nom', 1117),
 ('злоумышленника', 'p', 'm', 1, 'nom', 1118),
 ('злоумышленников', 'p', 'm', 2, 'nom', 1119),
 ('змеев', 'p', 'm', 2, 'nom', 1120),
@@ -14785,8 +14781,7 @@ INSERT INTO `subject` (`word`, `ps`, `g`, `ps_type`, `case`, `id`) VALUES
 ('резидентов', 'p', 'm', 2, 'nom', 2193),
 ('рекордсмен', 's', 'm', 0, 'nom', 2194),
 ('рекордсмена', 'p', 'm', 1, 'nom', 2195),
-('рекордсменов', 'p', 'm', 2, 'nom', 2196);
-INSERT INTO `subject` (`word`, `ps`, `g`, `ps_type`, `case`, `id`) VALUES
+('рекордсменов', 'p', 'm', 2, 'nom', 2196),
 ('ректор', 's', 'm', 0, 'nom', 2197),
 ('ректора', 'p', 'm', 1, 'nom', 2198),
 ('ректоров', 'p', 'm', 2, 'nom', 2199),
