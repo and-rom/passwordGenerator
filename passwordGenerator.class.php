@@ -27,30 +27,26 @@ class passwordGenerator {
   }
 
   function printJSON() {
-    /*echo $this->wordsCount . "\n";
-    echo $this->digitsCount . "\n";
-    echo $this->upperCaseLetter . "\n";
-    echo $this->charactersCount . "\n";
-    echo $this->passwordsCount . "\n";*/
     print json_encode($this->passwords,JSON_UNESCAPED_UNICODE);
   }
 
   function printPure() {
-    /*echo $this->wordsCount . "\n";
-    echo $this->digitsCount . "\n";
-    echo $this->upperCaseLetter . "\n";
-    echo $this->charactersCount . "\n";
-    echo $this->passwordsCount . "\n";*/
+    foreach ($this->passwords as $pair){
+      print $pair['password'] . " " . $pair['sentence'] . "\n";
+    }
+  }
+  function printPreHTML() {
     $i=1;
+    print  "<pre style=\"white-space: pre-wrap;\">\n";
     foreach ($this->passwords as $pair){
       print ($i<10 ? "0" . $i: $i) . " " . $pair['password'] . " " . $pair['sentence'] . "\n";
       $i++;
     }
+    print "</pre>\n";
   }
 
-
   function generate() {
-    for ($i = 0; $i <= $this->passwordsCount-1; $i++) {
+    for ($i = 0; $i < $this->passwordsCount; $i++) {
       $number = $this->generateNumber();
       $ps_type = $this->getPluralType($number);
 
@@ -73,7 +69,7 @@ class passwordGenerator {
       }
 
       ksort($words);
-
+/*
       if ($number > 1) {
         $sentence = $number." ";
         $password = $number;
@@ -81,13 +77,28 @@ class passwordGenerator {
         $sentence = "";
         $password = "";
       }
+
       foreach ($words as $word) {
         if ($this->upperCaseLetter) {$word = mb_convert_case($word,MB_CASE_TITLE);}
          $sentence .= $word." ";
          $password .= $this->invertLayout(mb_substr($word,0,$this->charactersCount));
       }
-      $pair['password'] = $password;
-      $pair['sentence'] = $sentence;
+*/
+      $sentence = array();
+      $password = array();
+      if ($number > 1) {
+        $sentence[] = $number;
+        $password[] = $number;
+      }
+
+      foreach ($words as $word) {
+        if ($this->upperCaseLetter) {$word = mb_convert_case($word,MB_CASE_TITLE);}
+         $sentence[] = $word;
+         $password[] = $this->invertLayout(mb_substr($word,0,$this->charactersCount));
+      }
+
+      $pair['password'] = implode($password);
+      $pair['sentence'] = implode(" ", $sentence);
       $this->passwords[] = $pair;
     }
   }
@@ -174,6 +185,21 @@ class passwordGenerator {
   function escape () {
     for($i = 0; $i < count($this->passwords);$i++) {
      $this->passwords[$i]['password'] = htmlspecialchars($this->passwords[$i]['password']);
+    }
+  }
+  function highlight () {
+    for ($i = 0; $i < count($this->passwords); $i++) {
+     $sentence = $this->passwords[$i]['sentence'];
+     $words = explode(" ", $sentence);
+     for ($j = 0; $j < count($words); $j++) {
+       if (preg_match('/^[0-9]+$/', $words[$j])) {
+         $words[$j] = "_" . $words[$j] . "_";
+       } else {
+         $words[$j] = mb_substr($words[$j], 0, 3)."_".mb_substr($words[$j], 3);
+         $words[$j] = "_" . $words[$j];
+       }
+     }
+     $this->passwords[$i]['sentence'] = implode(" ", $words);
     }
   }
 }

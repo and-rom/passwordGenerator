@@ -28,21 +28,40 @@ var xmlhttp;
 if (window.XMLHttpRequest) {
   // code for IE7+, Firefox, Chrome, Opera, Safari
   xmlhttp=new XMLHttpRequest();
-}
-else {
+} else {
   // code for IE6, IE5
   xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
 }
 xmlhttp.onreadystatechange=function() {
   if (xmlhttp.readyState==4 && xmlhttp.status==200) {
-    var data1 = xmlhttp.responseText;
-    document.getElementById("passwords").innerHTML = data1;
-    //var data = escape(xmlhttp.responseText);
-    //var data = JSON.parse(escape(xmlhttp.responseText));
-    var data = eval("(" + escape(xmlhttp.responseText) + ")");
-
+    var data = xmlhttp.responseText;
+    //var data = eval("(" + xmlhttp.responseText + ")");
+    document.getElementById("passwords").innerHTML = data;
   }
 }
+
+document.addEventListener('keyup', function(event){
+                                     if (event.ctrlKey && event.keyCode == 13) {
+                                       var selection = window.getSelection().toString();;
+                                       console.log(selection.length);
+                                       if (selection.length > 120) {
+                                         alert("Вы выбрали слишком большой объем текста!");
+                                       } else {
+                                         var form = document.createElement("form");
+                                         form.setAttribute("method", "post");
+                                         form.setAttribute("action", "mistakes.php");
+
+                                         var hiddenField = document.createElement("input");
+                                         hiddenField.setAttribute("type", "hidden");
+                                         hiddenField.setAttribute("name", "mistake");
+                                         hiddenField.setAttribute("value", selection);
+
+                                         form.appendChild(hiddenField);
+                                         document.body.appendChild(form);
+                                         form.submit();
+                                       }
+                                     }
+                                   }, false);
 
 
 </script>
