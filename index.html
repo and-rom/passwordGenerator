@@ -35,7 +35,17 @@ font-size: 0.8em;
     for (i = 0; i < inputs.length; ++i) {
       switch (inputs[i].getAttribute("type")) {
         case "number":
-          string += inputs[i].getAttribute("name") + "=" + inputs[i].value;
+          max_value = inputs[i].getAttribute("max");
+          min_value = inputs[i].getAttribute("min");
+          if (inputs[i].value > max_value) {
+            inputs[i].value = max_value;
+            string += inputs[i].getAttribute("name") + "=" + inputs[i].value;
+          } else if (inputs[i].value < min_value) {
+            inputs[i].value = min_value;
+            string += inputs[i].getAttribute("name") + "=" + inputs[i].value;
+          } else {
+            string += inputs[i].getAttribute("name") + "=" + inputs[i].value;
+          }
           break;
         case "checkbox":
           string += inputs[i].getAttribute("name") + "=" + (inputs[i].checked ? "1" : "0");
@@ -111,7 +121,10 @@ document.addEventListener('keyup', function(event){
     <label for="charactersCount">Количество букв из каждого слова</label>
 
     <br />
-    <label for="upperCaseLetter"><input type="checkbox" name="upperCaseLetter" id="upperCaseLetter-0">Использовать заглавные буквы в начале слов</label>
+    <label for="upperCaseLetter"><input type="checkbox" name="upperCaseLetter" id="upperCaseLetter">Использовать заглавные буквы в начале слов</label>
+    <br />
+
+    <label for="transliterate"><input type="checkbox" name="transliterate" id="transliterate">Использовать транслит</label>
     <br />
 
     <input type="button" id="generate" onclick="handleClick()" value="Создать пароли">
