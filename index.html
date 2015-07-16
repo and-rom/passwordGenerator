@@ -1,3 +1,4 @@
+<meta charset='utf-8'>
 <style type="text/css">
 .btn {
   -webkit-border-radius: 3;
@@ -25,8 +26,27 @@ bottom: 0;
 text-align: left;
 font-size: 0.8em;
 }
+.highlight {
+  color: red;
+}
+.passwords {
+  font-family: monospace;
+  border-collapse: collapse;
+  width: 80em;
+}
+.passwords td {
+  padding: .5em;
+}
+#form {
+  width: 65em;
+}
 </style>
 <script>
+  function highlight(str) {
+    str = str.replace(/\*/g, "<span class=\"highlight\">").replace(/_/g, "</span>");
+    return str
+  }
+
   function handleClick(){
     form = document.form;
     inputs = form.getElementsByTagName('input');
@@ -72,9 +92,53 @@ if (window.XMLHttpRequest) {
 }
 xmlhttp.onreadystatechange=function() {
   if (xmlhttp.readyState==4 && xmlhttp.status==200) {
-    var data = xmlhttp.responseText;
+    var data = this.responseText;
+    try {
+      var json_obj = JSON.parse(data);
+      console.log("It's JSON");
+
+      var table =  document.getElementById('passwords-table');
+      if (typeof(table) != 'undefined' && table != null) {
+        table.parentNode.removeChild(table);
+      }
+
+      var table = document.createElement('table');
+      table.setAttribute('class', 'passwords');
+      table.setAttribute('border', '1');
+      table.setAttribute('id', 'passwords-table');      
+
+      var table_body = document.createElement('tbody');
+
+      for(var i=0;i<json_obj.length;i++) {
+        var tr = document.createElement('tr');
+
+        var td0 = document.createElement('td');
+        var b = document.createElement('strong');
+        b.innerHTML = (i < 10 ? "0" + i : i);
+        td0.appendChild(b);
+
+        var td1 = document.createElement('td');
+        td1.innerHTML = json_obj[i]["password"];
+
+        var td2 = document.createElement('td');
+        td2.innerHTML = highlight(json_obj[i]["sentence"]);
+
+        tr.appendChild(td0);
+        tr.appendChild(td1);
+        tr.appendChild(td2);
+        table_body.appendChild(tr);
+      }
+      table.appendChild(table_body);
+
+      document.getElementById("passwords").appendChild(table);
+
+    } catch (e) {
+      console.log("It's not JSON");
+      //document.getElementById("passwords").innerHTML = data;
+    }
+
     //var data = eval("(" + xmlhttp.responseText + ")");
-    document.getElementById("passwords").innerHTML = data;
+    //document.getElementById("passwords").innerHTML = data;
   }
 }
 
@@ -103,6 +167,7 @@ document.addEventListener('keyup', function(event){
 
 
 </script>
+<div id="form">
 <form name="form" id="form-0">
   <fieldset>
     <legend>Параметры генерации паролей</legend>
@@ -121,7 +186,7 @@ document.addEventListener('keyup', function(event){
     <label for="charactersCount">Количество букв из каждого слова</label>
 
     <br />
-    <label for="upperCaseLetter"><input type="checkbox" name="upperCaseLetter" id="upperCaseLetter">Использовать заглавные буквы в начале слов</label>
+    <label for="upperCaseLetter"><input type="checkbox" name="upperCaseLetter" id="upperCaseLetter" checked>Использовать заглавные буквы в начале слов</label>
     <br />
 
     <label for="transliterate"><input type="checkbox" name="transliterate" id="transliterate">Использовать транслит</label>
@@ -130,5 +195,6 @@ document.addEventListener('keyup', function(event){
     <input type="button" id="generate" onclick="handleClick()" value="Создать пароли">
   </fieldset>
 </form>
+</div>
 <div id="passwords"></div>
 <div id="mitake_hint"><p>Ошибка?<br>Выдели текст и<br>нажми <span class="btn">Ctrl</span>+<span class="btn">Enter</span>.</p></div>
