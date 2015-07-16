@@ -13,14 +13,16 @@ class passwordGenerator {
   public $charactersCount;
   public $passwordsCount;
 
-  private $passwords=array();
+  private $passwords = array();
+  private $transliterated = False;
 
-  function __construct($wordsCount,$digitsCount,$upperCaseLetter,$charactersCount,$passwordsCount) {
+  function __construct($wordsCount,$digitsCount,$upperCaseLetter,$charactersCount,$passwordsCount,$transliterate = False) {
     $this->wordsCount = $wordsCount;
     $this->digitsCount = $digitsCount;
     $this->upperCaseLetter = $upperCaseLetter;
     $this->charactersCount = $charactersCount;
     $this->passwordsCount = $passwordsCount;
+    $this->transliterated = $transliterate;
   }
 
   function __destruct() {
@@ -45,7 +47,16 @@ class passwordGenerator {
     print "</pre>\n";
   }
 
-  function generate() {
+  function printVarDump() {
+    print  "<pre style=\"white-space: pre-wrap;\">\n";
+    var_dump($this->passwords);
+    print "</pre>\n";
+    print  "<pre style=\"white-space: pre-wrap;\">\n";
+    print_r ($this->passwords);
+    print "</pre>\n";
+  }
+
+  function generateSentences() {
     for ($i = 0; $i < $this->passwordsCount; $i++) {
       $number = $this->generateNumber();
       $ps_type = $this->getPluralType($number);
@@ -85,22 +96,48 @@ class passwordGenerator {
       }
 */
       $sentence = array();
-      $password = array();
+//      $password = array();
       if ($number > 1) {
         $sentence[] = $number;
-        $password[] = $number;
+//        $password[] = $number;
       }
 
       foreach ($words as $word) {
         if ($this->upperCaseLetter) {$word = mb_convert_case($word,MB_CASE_TITLE);}
          $sentence[] = $word;
-         $password[] = $this->invertLayout(mb_substr($word,0,$this->charactersCount));
+//         $password[] = $this->invertLayout(mb_substr($word,0,$this->charactersCount));
       }
 
+/*
       $pair['password'] = implode($password);
       $pair['sentence'] = implode(" ", $sentence);
       $this->passwords[] = $pair;
+*/
+      $this->passwords[]['sentence'] = implode(" ", $sentence);;
+
     }
+  }
+
+  function generatePasswords() {
+    for ($i = 0; $i < count($this->passwords); $i++) {
+      $words = explode (" ",$this->passwords[$i]['sentence']);
+      $password = array();
+      foreach ($words as $word) {
+        if (preg_match('/^[0-9]+$/', $word)) {
+          $password[] = $word;
+        } else {
+          $part_to_password = mb_substr($word,0,$this->charactersCount);
+          $password[] = ($this->transliterated ? $part_to_password : $this->invertLayout($part_to_password));
+        }
+      }
+      $this->passwords[$i]['password'] = implode($password);
+    }
+  }
+
+  function generate() {
+    $this->generateSentences();
+    if ($this->transliterated) $this->transliterate();
+    $this->generatePasswords();
   }
 
   private function generateNumber() {
@@ -113,6 +150,12 @@ class passwordGenerator {
       default: $number = 1;
     }
     return $number;
+  }
+
+  public function transliterate() {
+    for ($i = 0; $i < count($this->passwords); $i++) {
+      $this->passwords[$i]['sentence'] = $this->get_in_translate_to_en($this->passwords[$i]['sentence'],True);
+    }
   }
 
   private function getSubject($ps_type) {
@@ -195,12 +238,40 @@ class passwordGenerator {
        if (preg_match('/^[0-9]+$/', $words[$j])) {
          $words[$j] = $highlighter_s . $words[$j] . $highlighter_f;
        } else {
-         $words[$j] = mb_substr($words[$j], 0, 3).$highlighter_f.mb_substr($words[$j], 3);
+         $words[$j] = mb_substr($words[$j], 0, $this->charactersCount).$highlighter_f.mb_substr($words[$j], $this->charactersCount);
          $words[$j] = $highlighter_s . $words[$j];
        }
      }
      $this->passwords[$i]['sentence'] = implode(" ", $words);
     }
+  }
+
+  private function get_in_translate_to_en($string, $gost=false){
+    if($gost) {
+      $replace = array("А"=>"A","а"=>"a","Б"=>"B","б"=>"b","В"=>"V","в"=>"v","Г"=>"G","г"=>"g","Д"=>"D","д"=>"d",
+                       "Е"=>"E","е"=>"e","Ё"=>"E","ё"=>"e","Ж"=>"Zh","ж"=>"zh","З"=>"Z","з"=>"z","И"=>"I","и"=>"i",
+                       "Й"=>"I","й"=>"i","К"=>"K","к"=>"k","Л"=>"L","л"=>"l","М"=>"M","м"=>"m","Н"=>"N","н"=>"n","О"=>"O","о"=>"o",
+                       "П"=>"P","п"=>"p","Р"=>"R","р"=>"r","С"=>"S","с"=>"s","Т"=>"T","т"=>"t","У"=>"U","у"=>"u","Ф"=>"F","ф"=>"f",
+                       "Х"=>"Kh","х"=>"kh","Ц"=>"Tc","ц"=>"tc","Ч"=>"Ch","ч"=>"ch","Ш"=>"Sh","ш"=>"sh","Щ"=>"Shch","щ"=>"shch",
+                       "Ы"=>"Y","ы"=>"y","Э"=>"E","э"=>"e","Ю"=>"Iu","ю"=>"iu","Я"=>"Ia","я"=>"ia","ъ"=>"","ь"=>"");
+    } else {
+      $arStrES = array("ае","уе","ое","ые","ие","эе","яе","юе","ёе","ее","ье","ъе","ый","ий");
+      $arStrOS = array("аё","уё","оё","ыё","иё","эё","яё","юё","ёё","её","ьё","ъё","ый","ий");        
+      $arStrRS = array("а$","у$","о$","ы$","и$","э$","я$","ю$","ё$","е$","ь$","ъ$","@","@");
+                    
+      $replace = array("А"=>"A","а"=>"a","Б"=>"B","б"=>"b","В"=>"V","в"=>"v","Г"=>"G","г"=>"g","Д"=>"D","д"=>"d",
+                      "Е"=>"Ye","е"=>"e","Ё"=>"Ye","ё"=>"e","Ж"=>"Zh","ж"=>"zh","З"=>"Z","з"=>"z","И"=>"I","и"=>"i",
+                      "Й"=>"Y","й"=>"y","К"=>"K","к"=>"k","Л"=>"L","л"=>"l","М"=>"M","м"=>"m","Н"=>"N","н"=>"n",
+                      "О"=>"O","о"=>"o","П"=>"P","п"=>"p","Р"=>"R","р"=>"r","С"=>"S","с"=>"s","Т"=>"T","т"=>"t",
+                      "У"=>"U","у"=>"u","Ф"=>"F","ф"=>"f","Х"=>"Kh","х"=>"kh","Ц"=>"Ts","ц"=>"ts","Ч"=>"Ch","ч"=>"ch",
+                      "Ш"=>"Sh","ш"=>"sh","Щ"=>"Shch","щ"=>"shch","Ъ"=>"","ъ"=>"","Ы"=>"Y","ы"=>"y","Ь"=>"","ь"=>"",
+                      "Э"=>"E","э"=>"e","Ю"=>"Yu","ю"=>"yu","Я"=>"Ya","я"=>"ya","@"=>"y","$"=>"ye");
+                
+      $string = str_replace($arStrES, $arStrRS, $string);
+      $string = str_replace($arStrOS, $arStrRS, $string);
+    }
+        
+    return iconv("UTF-8","UTF-8//IGNORE",strtr($string,$replace));
   }
 }
 ?>
