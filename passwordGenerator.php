@@ -3,10 +3,10 @@ require_once('passwordGenerator.class.php');
 if (!empty($_GET)){
 $pwgen = new passwordGenerator($_GET['wordsCount'],$_GET['digitsCount'],(bool)$_GET['upperCaseLetter'],$_GET['charactersCount'],$_GET['passwordsCount'],(isset($_GET['transliterate']) ? (bool)$_GET['transliterate'] : False));
 $pwgen->generate();
-$variant = 4;
+$variant = 1;
     switch ($variant) {
       case 1:
-        $pwgen->highlight("<span style=\"color: red\">","</span>");
+        //$pwgen->highlight("<span style=\"color: red\">","</span>");
         $pwgen->escape();
         $pwgen->printPreHTML();
         break;

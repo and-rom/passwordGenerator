@@ -100,6 +100,8 @@ xmlhttp.onreadystatechange=function() {
       var table =  document.getElementById('passwords-table');
       if (typeof(table) != 'undefined' && table != null) {
         table.parentNode.removeChild(table);
+      } else {
+        document.getElementById("passwords").innerHTML = "";
       }
 
       var table = document.createElement('table');
@@ -134,7 +136,7 @@ xmlhttp.onreadystatechange=function() {
 
     } catch (e) {
       console.log("It's not JSON");
-      //document.getElementById("passwords").innerHTML = data;
+      document.getElementById("passwords").innerHTML = data;
     }
 
     //var data = eval("(" + xmlhttp.responseText + ")");
