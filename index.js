@@ -11,19 +11,20 @@
     for (i = 0; i < inputs.length; ++i) {
       switch (inputs[i].getAttribute("type")) {
         case "number":
-          max_value = inputs[i].getAttribute("max");
-          min_value = inputs[i].getAttribute("min");
-          if (inputs[i].value > max_value) {
+          max_value = parseInt(inputs[i].getAttribute("max"));
+          min_value = parseInt(inputs[i].getAttribute("min"));
+          value = parseInt(inputs[i].value);
+          if (value >= max_value) {
             inputs[i].value = max_value;
             string += "&";
-            string += inputs[i].getAttribute("name") + "=" + inputs[i].value;
-          } else if (inputs[i].value < min_value) {
+            string += inputs[i].getAttribute("name") + "=" + value;
+          } else if (value <= min_value) {
             inputs[i].value = min_value;
             string += "&";
-            string += inputs[i].getAttribute("name") + "=" + inputs[i].value;
+            string += inputs[i].getAttribute("name") + "=" + value;
           } else {
             string += "&";
-            string += inputs[i].getAttribute("name") + "=" + inputs[i].value;
+            string += inputs[i].getAttribute("name") + "=" + value;
           }
           break;
         case "checkbox":
@@ -34,8 +35,7 @@
           continue;
       }
     }
-    console.log("passwordGenerator.php?format=json"+string);
-    xmlhttp.open("GET","passwordGenerator.php?format=json&"+string,true);
+    xmlhttp.open("GET","passwordGenerator.php?format=json&hl=1&"+string,true);
     xmlhttp.send();
   }
 
@@ -55,8 +55,6 @@ xmlhttp.onreadystatechange=function() {
     var data = this.responseText;
     try {
       var json_obj = JSON.parse(data);
-      console.log("It's JSON");
-
       var table =  document.getElementById('passwords-table');
       if (typeof(table) != 'undefined' && table != null) {
         table.parentNode.removeChild(table);
@@ -71,7 +69,7 @@ xmlhttp.onreadystatechange=function() {
 
       var table_body = document.createElement('tbody');
 
-      for(var i=1;i<+json_obj.length;i++) {
+      for(var i=1;i<=json_obj.length;i++) {
         var tr = document.createElement('tr');
         tr.setAttribute('class', 'bg_' + ((i % 2) + 1));
         var td0 = document.createElement('td');
@@ -95,12 +93,8 @@ xmlhttp.onreadystatechange=function() {
       document.getElementById("passwords").appendChild(table);
 
     } catch (e) {
-      console.log("It's not JSON");
       document.getElementById("passwords").innerHTML = data;
     }
-
-    //var data = eval("(" + xmlhttp.responseText + ")");
-    //document.getElementById("passwords").innerHTML = data;
   }
 }
 
