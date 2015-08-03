@@ -1,202 +1,33 @@
-<meta charset='utf-8'>
-<style type="text/css">
-.btn {
-  -webkit-border-radius: 3;
-  -moz-border-radius: 3;
-  border-radius: 3px;
-  font-family: Arial;
-  color: #000000;
-  background: #cccccc;
-  padding: 1px 3px 1px 3px;
-  border-top: solid #ffffff 2px;
-  border-right: solid #b8b8b8 2px;
-  border-bottom: solid #b8b8b8 2px;
-  border-left: solid #ffffff 2px;
-  text-decoration: none;
-}
-#mitake_hint {
-border: dotted grey 1px;
-padding: 0px 2px;
-margin-bottom:5px;
-margin-left:5px;
-position: fixed;
-
-left: 0;
-bottom: 0;
-text-align: left;
-font-size: 0.8em;
-}
-.highlight {
-  color: red;
-}
-.passwords {
-  font-family: monospace;
-  border-collapse: collapse;
-  width: 80em;
-}
-.passwords td {
-  padding: .5em;
-}
-#form {
-  width: 65em;
-}
-</style>
-<script>
-  function highlight(str) {
-    str = str.replace(/\*/g, "<span class=\"highlight\">").replace(/_/g, "</span>");
-    return str
-  }
-
-  function handleClick(){
-    form = document.form;
-    inputs = form.getElementsByTagName('input');
-    values = {};
-    string = "";
-    for (i = 0; i < inputs.length; ++i) {
-      switch (inputs[i].getAttribute("type")) {
-        case "number":
-          max_value = inputs[i].getAttribute("max");
-          min_value = inputs[i].getAttribute("min");
-          if (inputs[i].value > max_value) {
-            inputs[i].value = max_value;
-            string += inputs[i].getAttribute("name") + "=" + inputs[i].value;
-          } else if (inputs[i].value < min_value) {
-            inputs[i].value = min_value;
-            string += inputs[i].getAttribute("name") + "=" + inputs[i].value;
-          } else {
-            string += inputs[i].getAttribute("name") + "=" + inputs[i].value;
-          }
-          break;
-        case "checkbox":
-          string += inputs[i].getAttribute("name") + "=" + (inputs[i].checked ? "1" : "0");
-          break
-        default:
-          continue;
-      }
-      string += "&";
-      xmlhttp.open("GET","passwordGenerator.php?"+string,true);
-      xmlhttp.send();
-    }
-  }
-
-
-
-var xmlhttp;
-
-if (window.XMLHttpRequest) {
-  // code for IE7+, Firefox, Chrome, Opera, Safari
-  xmlhttp=new XMLHttpRequest();
-} else {
-  // code for IE6, IE5
-  xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
-}
-xmlhttp.onreadystatechange=function() {
-  if (xmlhttp.readyState==4 && xmlhttp.status==200) {
-    var data = this.responseText;
-    try {
-      var json_obj = JSON.parse(data);
-      console.log("It's JSON");
-
-      var table =  document.getElementById('passwords-table');
-      if (typeof(table) != 'undefined' && table != null) {
-        table.parentNode.removeChild(table);
-      } else {
-        document.getElementById("passwords").innerHTML = "";
-      }
-
-      var table = document.createElement('table');
-      table.setAttribute('class', 'passwords');
-      table.setAttribute('border', '1');
-      table.setAttribute('id', 'passwords-table');      
-
-      var table_body = document.createElement('tbody');
-
-      for(var i=0;i<json_obj.length;i++) {
-        var tr = document.createElement('tr');
-
-        var td0 = document.createElement('td');
-        var b = document.createElement('strong');
-        b.innerHTML = (i < 10 ? "0" + i : i);
-        td0.appendChild(b);
-
-        var td1 = document.createElement('td');
-        td1.innerHTML = json_obj[i]["password"];
-
-        var td2 = document.createElement('td');
-        td2.innerHTML = highlight(json_obj[i]["sentence"]);
-
-        tr.appendChild(td0);
-        tr.appendChild(td1);
-        tr.appendChild(td2);
-        table_body.appendChild(tr);
-      }
-      table.appendChild(table_body);
-
-      document.getElementById("passwords").appendChild(table);
-
-    } catch (e) {
-      console.log("It's not JSON");
-      document.getElementById("passwords").innerHTML = data;
-    }
-
-    //var data = eval("(" + xmlhttp.responseText + ")");
-    //document.getElementById("passwords").innerHTML = data;
-  }
-}
-
-document.addEventListener('keyup', function(event){
-                                     if (event.ctrlKey && event.keyCode == 13) {
-                                       var selection = window.getSelection().toString();;
-                                       console.log(selection.length);
-                                       if (selection.length > 120) {
-                                         alert("Вы выбрали слишком большой объем текста!");
-                                       } else {
-                                         var form = document.createElement("form");
-                                         form.setAttribute("method", "post");
-                                         form.setAttribute("action", "mistakes.php");
-
-                                         var hiddenField = document.createElement("input");
-                                         hiddenField.setAttribute("type", "hidden");
-                                         hiddenField.setAttribute("name", "mistake");
-                                         hiddenField.setAttribute("value", selection);
-
-                                         form.appendChild(hiddenField);
-                                         document.body.appendChild(form);
-                                         form.submit();
-                                       }
-                                     }
-                                   }, false);
-
-
-</script>
-<div id="form">
-<form name="form" id="form-0">
-  <fieldset>
-    <legend>Параметры генерации паролей</legend>
-    <input id="passwordsCount" name="passwordsCount" type="number" value="10" min="1" max="50" />
-    <label for="passwordsCount">Количество создаваемых паролей</label>
-    <br />
-    <input id="wordsCount" name="wordsCount" type="number" value="5" min="3" max="5" />
-    <label for="wordsCount">Количество слов во фразе</label>
-
-    <br />
-    <input id="digitsCount" name="digitsCount" type="number" value="2" min="0" max="4" />
-    <label for="digitsCount">Количество цифр в начале фразы</label>
-
-    <br />
-    <input id="charactersCount" name="charactersCount" type="number" value="3" min="3" max="4" />
-    <label for="charactersCount">Количество букв из каждого слова</label>
-
-    <br />
-    <label for="upperCaseLetter"><input type="checkbox" name="upperCaseLetter" id="upperCaseLetter" checked>Использовать заглавные буквы в начале слов</label>
-    <br />
-
-    <label for="transliterate"><input type="checkbox" name="transliterate" id="transliterate">Использовать транслит</label>
-    <br />
-
-    <input type="button" id="generate" onclick="handleClick()" value="Создать пароли">
-  </fieldset>
-</form>
-</div>
-<div id="passwords"></div>
-<div id="mitake_hint"><p>Ошибка?<br>Выдели текст и<br>нажми <span class="btn">Ctrl</span>+<span class="btn">Enter</span>.</p></div>
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Password Generator</title>
+    <link rel="icon" href="img/favicon.ico" type="image/x-icon"><link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" type="text/css" media="screen" href="style.css" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=0.8, maximum-scale=1.0, user-scalable=no">
+    <script type="text/javascript" src="index.js"></script>
+  </head>
+  <body>
+    <div id="form">
+      <form name="form" id="form-0">
+        <fieldset>
+          <legend>Параметры генерации паролей</legend>
+          <input id="passwordsCount" class="field" name="passwordsCount" type="number" value="10" min="1" max="50" />
+          <label for="passwordsCount">Количество создаваемых паролей</label><br />
+          <input id="wordsCount" name="wordsCount" type="number" value="5" min="3" max="5" />
+          <label for="wordsCount">Количество слов во фразе</label><br />
+          <input id="digitsCount" name="digitsCount" type="number" value="2" min="0" max="4" />
+          <label for="digitsCount">Количество цифр в начале фразы</label><br />
+          <input id="charactersCount" name="charactersCount" type="number" value="3" min="3" max="4" />
+          <label for="charactersCount">Количество букв из каждого слова</label><br />
+          <label for="upperCaseLetter"><input type="checkbox" name="upperCaseLetter" id="upperCaseLetter" checked>Использовать заглавные буквы в начале слов</label><br />
+          <label for="transliterate"><input type="checkbox" name="transliterate" id="transliterate">Использовать транслит</label><br />
+          <input type="button" id="generate" onclick="handleClick()" value="Создать пароли">
+        </fieldset>
+      </form>
+    </div>
+    <div id="passwords"></div>
+    <div id="mitake_hint"><p>Ошибка? Выдели текст и нажми <span class="mitake_hint_button">Ctrl</span>+<span class="mitake_hint_button">Enter</span>.</p></div>
+  </body>
+</html>
