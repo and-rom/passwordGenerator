@@ -1,0 +1,53 @@
+#form {
+  margin: 0;
+  padding: 0;
+}
+
+#generate {
+  width: 100%;
+}
+
+.passwords {
+  margin-top: 1em;
+  font-family: monospace;
+  border-collapse: collapse;
+  width: 100%;
+}
+.passwords td {
+/*  padding: .5em;*/
+}
+
+
+.highlight {
+  color: red;
+}
+.bg_0 {
+  background: #ffffff;
+}
+
+.bg_1 {
+  background: #eeeeee;
+}
+
+#mitake_hint {
+  border: dotted grey 1px;
+  padding: 0 1em;
+  margin-top:1em;
+  text-align: left;
+  font-size: 0.8em;
+}
+
+.mitake_hint_button {
+  -webkit-border-radius: 3;
+  -moz-border-radius: 3;
+  border-radius: 3px;
+  font-family: Arial;
+  color: #000000;
+  background: #cccccc;
+  padding: 1px 3px 1px 3px;
+  border-top: solid #ffffff 2px;
+  border-right: solid #b8b8b8 2px;
+  border-bottom: solid #b8b8b8 2px;
+  border-left: solid #ffffff 2px;
+  text-decoration: none;
+}
