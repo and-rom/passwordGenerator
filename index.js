@@ -80,7 +80,7 @@ xmlhttp.onreadystatechange=function() {
         td0.appendChild(b);
 
         var td1 = document.createElement('td');
-        td1.innerHTML = json_obj[i]["password"];
+        td1.innerHTML = json_obj[i-1]["password"];
 
         var td2 = document.createElement('td');
         td2.innerHTML = highlight(json_obj[i-1]["sentence"]);
