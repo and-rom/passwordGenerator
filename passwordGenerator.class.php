@@ -1,9 +1,6 @@
 <?php
+include_once('config_db.php');
 mb_internal_encoding("UTF-8");
-
-mysql_connect("localhost", "root", "hjvfyjd") or die("Ошибка соединения: " . mysql_error());
-mysql_set_charset("utf8");
-mysql_select_db("pwgen");
 
 class passwordGenerator {
 
@@ -15,6 +12,7 @@ class passwordGenerator {
 
   private $passwords = array();
   private $transliterated = False;
+  private $link;
 
   function __construct($wordsCount,$digitsCount,$upperCaseLetter,$charactersCount,$passwordsCount,$transliterate = False) {
     $this->wordsCount = $wordsCount;
@@ -23,9 +21,11 @@ class passwordGenerator {
     $this->charactersCount = $charactersCount;
     $this->passwordsCount = $passwordsCount;
     $this->transliterated = $transliterate;
+    $this->connect();
   }
 
   function __destruct() {
+    mysqli_close($this->link);
   }
 
   function printJSON() {
@@ -34,7 +34,7 @@ class passwordGenerator {
 
   function printPure() {
     foreach ($this->passwords as $pair){
-      print $pair['password'] . " " . $pair['sentence'] . "\n";
+      print (isset($pair['password']) ? $pair['password'] . " " : "") . $pair['sentence'] . "\n";
     }
   }
   function printPreHTML() {
@@ -184,9 +184,15 @@ class passwordGenerator {
   }
 
   private function dbQuery($query) {
-    $result = mysql_query($query) or die("Query failed");
-    $row = mysql_fetch_array($result,MYSQL_ASSOC);
+    $result = mysqli_query($this->link,$query) or die("Query failed" . mysqli_error($this->link));
+    $row = mysqli_fetch_array($result,MYSQL_ASSOC);
     return $row;
+  }
+
+  private function connect() {
+    $this->link = mysqli_connect(DBHOST, DBUSER, DBPASS) or die("Connection error: " . mysqli_error($this->link));
+    mysqli_set_charset($this->link,"utf8") or die("Error: " . mysqli_error($this->link));
+    mysqli_select_db($this->link,DBNAME) or die("Error: " . mysqli_error($lthis->ink));
   }
 
   private function getPluralType($number) {
