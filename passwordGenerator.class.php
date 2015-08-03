@@ -14,7 +14,7 @@ class passwordGenerator {
   private $transliterated = False;
   private $link;
 
-  function __construct($wordsCount,$digitsCount,$upperCaseLetter,$charactersCount,$passwordsCount,$transliterate = False) {
+  function __construct($passwordsCount = 5,$wordsCount = 3,$digitsCount = 0,$charactersCount = 3,$upperCaseLetter = False,$transliterate = False) {
     $this->wordsCount = $wordsCount;
     $this->digitsCount = $digitsCount;
     $this->upperCaseLetter = $upperCaseLetter;
@@ -41,7 +41,7 @@ class passwordGenerator {
     $i=1;
     print  "<pre style=\"white-space: pre-wrap;\">\n";
     foreach ($this->passwords as $pair){
-      print "<strong>" . ($i<10 ? "0" . $i: $i) . "</strong> " . $pair['password'] . " " . $pair['sentence'] . "\n";
+      print $pair['password'] . " " . $pair['sentence'] . "\n";
       $i++;
     }
     print "</pre>\n";
