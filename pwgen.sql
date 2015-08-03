@@ -19,8 +19,8 @@ SET time_zone = "+00:00";
 --
 -- База данных: `pwgen`
 --
-CREATE DATABASE IF NOT EXISTS `pwgen` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
-USE `pwgen`;
+--  CREATE DATABASE IF NOT EXISTS `pwgen` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
+--  USE `pwgen`;
 
 -- --------------------------------------------------------
 
