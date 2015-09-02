@@ -4,7 +4,7 @@ require_once('passwordGenerator.class.php');
 if (!empty($_GET)){
 
   $format         = (isset($_GET['format']) ? $_GET['format'] : "");
-  $highlight      = (isset($_GET['hl']) ? (bool)$_GET['hl'] : False);
+  $highlight      = (isset($_GET['hl']) ? ((bool)$_GET['hl'] ? $_GET['hl'] : False) : False);
   $passwordsCount = (isset($_GET['pc']) ? $_GET['pc'] : 5);
 
   if (isset($_GET['args']) and !empty(isset($_GET['args']))) {
@@ -36,21 +36,33 @@ if (!empty($_GET)){
     case "html":
       header("Content-Type: text/html; charset=utf-8");
       $pwgen->generate();
-      if ($highlight) $pwgen->highlight("<span style=\"color: red\">","</span>");
+      if ($highlight) {
+        $before = ($highlight == 1 ? "<span style=\"color: red\">" : (isset(str_split($highlight)[1]) ? str_split($highlight)[0] : ""));
+        $after = ($highlight == 1 ? "</span>" : (isset(str_split($highlight)[1]) ? str_split($highlight)[1] : str_split($highlight)[0]));
+        $pwgen->highlight($before,$after);
+      }
       $pwgen->escape();
       $pwgen->printPreHTML();
       break;
     case "pure":
       header("Content-Type: text/plain; charset=utf-8");
       $pwgen->generate();
-      if ($highlight) $pwgen->highlight("_","_");
+      if ($highlight) {
+        $before = ($highlight == 1 ? "_" : (isset(str_split($highlight)[1]) ? str_split($highlight)[0] : ""));
+        $after = ($highlight == 1 ? "_" : (isset(str_split($highlight)[1]) ? str_split($highlight)[1] : str_split($highlight)[0]));
+        $pwgen->highlight($before,$after);
+      }
       $pwgen->escape();
       $pwgen->printPure();
       break;
     case "json":
       header("Content-Type: application/json; charset=utf-8");
       $pwgen->generate();
-      if ($highlight) $pwgen->highlight("*","_");
+      if ($highlight) {
+        $before = ($highlight == 1 ? "*" : (isset(str_split($highlight)[1]) ? str_split($highlight)[0] : ""));
+        $after = ($highlight == 1 ? "_" : (isset(str_split($highlight)[1]) ? str_split($highlight)[1] : str_split($highlight)[0]));
+        $pwgen->highlight($before,$after);
+      }
       $pwgen->escape();
       $pwgen->printJSON();
       break;
@@ -62,7 +74,11 @@ if (!empty($_GET)){
     default:
       header("Content-Type: text/html; charset=utf-8");
       $pwgen->generate();
-      if ($highlight) $pwgen->highlight("_","_");
+      if ($highlight) {
+        $before = ($highlight == 1 ? "_" : (isset(str_split($highlight)[1]) ? str_split($highlight)[0] : ""));
+        $after = ($highlight == 1 ? "_" : (isset(str_split($highlight)[1]) ? str_split($highlight)[1] : str_split($highlight)[0]));
+        $pwgen->highlight($before,$after);
+      }
       $pwgen->escape();
       $pwgen->printPreHTML();
     }
