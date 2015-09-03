@@ -13,21 +13,22 @@
       <form name="form" id="form-0">
         <fieldset>
           <legend>Параметры генерации паролей</legend>
-          <input id="pc" class="field" name="pc" type="number" value="5" min="1" max="50" />
+          <input id="pc" class="field" name="pc" type="number" value="5" min="1" max="50"/>
           <label for="pc">Количество создаваемых паролей</label><br />
-          <input id="wc" name="wc" type="number" value="3" min="3" max="5" />
+          <input id="wc" name="wc" type="number" value="3" min="3" max="5" onchange="count_symbols();"/>
           <label for="wc">Количество слов во фразе</label><br />
-          <input id="dc" name="dc" type="number" value="0" min="0" max="4" />
+          <input id="dc" name="dc" type="number" value="0" min="0" max="4" onchange="count_symbols();"/>
           <label for="dc">Количество цифр в начале фразы</label><br />
-          <input id="cc" name="cc" type="number" value="3" min="2" max="4" />
+          <input id="cc" name="cc" type="number" value="3" min="2" max="4" onchange="count_symbols();"/>
           <label for="cc">Количество букв из каждого слова</label><br />
           <label for="ul"><input type="checkbox" name="ul" id="ul">Использовать заглавные буквы в начале слов</label><br />
           <label for="tl"><input type="checkbox" name="tl" id="tl">Использовать транслит</label><br />
+          <span>Длина пароля&nbsp;</span><span id="count_symbols">12</span><span>&nbsp;символов</span>
           <input type="button" id="generate" onclick="handleClick()" value="Создать пароли">
         </fieldset>
       </form>
     </div>
     <div id="passwords"></div>
-    <div id="mitake_hint"><p>Ошибка? Выдели текст и нажми <kbd>Ctrl</kbd> + <kbd>Enter</kbd>.</p></div>
+    <div id="mistake_hint"><p>Ошибка? Выдели текст и нажми <kbd>Ctrl</kbd> + <kbd>Enter</kbd>.</p></div>
   </body>
 </html>

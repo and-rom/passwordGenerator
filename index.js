@@ -16,10 +16,12 @@
           value = parseInt(inputs[i].value);
           if (value >= max_value) {
             inputs[i].value = max_value;
+            value = max_value;
             string += "&";
             string += inputs[i].getAttribute("name") + "=" + value;
           } else if (value <= min_value) {
             inputs[i].value = min_value;
+            value = min_value;
             string += "&";
             string += inputs[i].getAttribute("name") + "=" + value;
           } else {
@@ -39,7 +41,13 @@
     xmlhttp.send();
   }
 
-
+  function count_symbols(){
+    dc = parseInt(document.getElementById('dc').value);
+    wc = parseInt(document.getElementById('wc').value);
+    cc = parseInt(document.getElementById('cc').value);
+    sc = cc * wc + dc;
+    document.getElementById('count_symbols').innerHTML = sc;
+  }
 
 var xmlhttp;
 

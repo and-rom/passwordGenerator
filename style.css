@@ -7,6 +7,10 @@
   width: 100%;
 }
 
+input[type="number"] {
+  width: 3em;
+}
+
 .passwords {
   margin-top: 1em;
   font-family: monospace;
@@ -29,7 +33,7 @@
   background: #eeeeee;
 }
 
-#mitake_hint {
+#mistake_hint {
   border: dotted grey 1px;
   padding: 0 1em;
   margin-top:1em;
