@@ -14,6 +14,6 @@ lftp -e "
 open $HOST
 user $USER $PASS
 lcd $SOURCEFOLDER
-mirror --exclude mistakes.txt --exclude config_db.php --exclude upload.sh --exclude .git/ --exclude .gitignore --exclude pwgen_1.sql --exclude pwgen_2.sql --exclude pwgen_3.sql --reverse --delete --verbose $SOURCEFOLDER $BASEFOLDER$TARGETFOLDER
+mirror --exclude mistakes.txt --exclude config_db.php --exclude upload.sh --exclude .git --exclude .git/ --exclude .gitignore --exclude pwgen_1.sql --exclude pwgen_2.sql --exclude pwgen_3.sql --exclude README.md --reverse --delete --verbose $SOURCEFOLDER $BASEFOLDER$TARGETFOLDER
 bye
 "
