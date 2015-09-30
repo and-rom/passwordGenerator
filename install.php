@@ -1,3 +1,6 @@
+<?php
+error_reporting(0);
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -18,40 +21,40 @@ if (!empty($_POST)) {
       $dbname = $_POST['dbname'];
       $dbuser = $_POST['dbuser'];
       $dbpass = $_POST['dbpass'];
-    if (filesize("config_db.php") <= 0 and !$config) {
-      $link = mysqli_connect($dbhost, $dbuser, $dbpass) or die("Connection error: " . mysqli_error($link));
-      mysqli_set_charset($link,"utf8") or die("Error: " . mysqli_error($link));
-      mysqli_select_db($link,$dbname) or die("Error: " . mysqli_error($link));
-      echo "Connection established with " . mysqli_get_host_info ($link) . ".<br />";
-      echo "Opening SQL file...<br />";
+    if (file_exists("config_db.php") and !$config) {
+      $link = mysqli_connect($dbhost, $dbuser, $dbpass) or die("Ошибка соединения: " . mysqli_error($link));
+      mysqli_set_charset($link,"utf8") or die("Ошибка: " . mysqli_error($link));
+      mysqli_select_db($link,$dbname) or die("Ошибка: " . mysqli_error($link));
+      echo "Соединение установлено с " . mysqli_get_host_info ($link) . ".<br />";
+      echo "Открываем SQL файл...<br />";
       $sql = file_get_contents("./pwgen.sql");
-      if (!$sql) {die ("Error opening SQL file");}
-      echo "Processing SQL file.<br />";
-      mysqli_multi_query($link,$sql) or die("Error: " . mysqli_error($link));
+      if (!$sql) {die ("Ошибка открытия SQL файла.");}
+      echo "Обрабатываем SQL файл...<br />";
+      mysqli_multi_query($link,$sql) or die("Ошибка: " . mysqli_error($link));
       mysqli_close($link);
-      echo "Done.<br />";
+      echo "Готово.<br />";
       $config = True;
     } 
     if ($config) {
-      echo "Opening config file...<br />";
-      $file = fopen("config_db.php","w");
+      echo "Открываем файл настроек...<br />";
+      $file = fopen("config_db.php","w") or die("Ошибка открытия файла настроек.");
       $config = "<?php\n";
       $config .= '  define("DBHOST", "' . $dbhost . '");' . "\n";
       $config .= '  define("DBUSER", "' . $dbuser . '");' . "\n";
       $config .= '  define("DBPASS", "' . $dbpass . '");' . "\n";
       $config .= '  define("DBNAME", "' . $dbname . '");' . "\n";
       $config .= "?>";
-      echo "Writing config file...<br />";
-      fwrite($file,$config);
+      echo "Записываем файл настроек...<br />";
+      fwrite($file,$config) or die("Ошибка записи файла настроек.");
       fclose($file);
-      echo "Config file done.<br />";
-      echo "<a href=./>Go home</a>";
+      echo "Файл настроек записан.<br />";
+      echo "<a href=./>На главную</a>";
       $ok = "ok";
     } else {
-      die("Installation has already been completed.");
+      die("Установка была проведена ранее.");
     }
   } else {
-    die("Not all fields are filled in.");
+    die("Не все поля заполнены.");
   }
 }
 
@@ -59,21 +62,21 @@ if (empty($_POST) | !isset($ok)) {
 ?>
   <form id="form-setup" method="post" action="<?=$_SERVER['SCRIPT_NAME']?>">
   <fieldset>
-    <legend>Setting up the database</legend>
+    <legend>Настройка базы данных</legend>
 	<fieldset>
-	  <legend>DB Server</legend>
-	  <label for="dbhost">User: </label><input id="dbhost" type="text" name="dbhost"/>
+	  <legend>Сервер</legend>
+	  <label for="dbhost">Адрес: </label><input id="dbhost" type="text" name="dbhost"/>
 	</fieldset>
 	<fieldset>
-	  <legend>DB User</legend>
-	  <label for="dbuser">User: </label><input id="dbuser" type="text" name="dbuser"/><br />
-	  <label for="dbpass">Pass: </label><input id="dbpass" type="password" name="dbpass"/>
+	  <legend>Пользователь</legend>
+	  <label for="dbuser">Имя: </label><input id="dbuser" type="text" name="dbuser"/><br />
+	  <label for="dbpass">сПароль: </label><input id="dbpass" type="password" name="dbpass"/>
 	</fieldset>
 	<fieldset>
-	  <legend>DB</legend>
-	  <label for="dbname">DB Name: </label><input id="dbname" type="text" name="dbname"/>
+	  <legend>База данных</legend>
+	  <label for="dbname">Имя: </label><input id="dbname" type="text" name="dbname"/>
 	</fieldset>
-        <input id="only_config" type="checkbox" name="only_config" checked/><label for="only_config">Only create config file</label><br />
+        <input id="only_config" type="checkbox" name="only_config" checked/><label for="only_config">Создать только файл настроек</label><br />
 	<input type="submit" name="submit" value="OK"/>
   </fieldset>
   </form>
