@@ -17,10 +17,6 @@ input[type="number"] {
   border-collapse: collapse;
   width: 100%;
 }
-.passwords td {
-/*  padding: .5em;*/
-}
-
 
 .highlight {
   color: red;
