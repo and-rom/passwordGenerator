@@ -5,16 +5,15 @@ PASS=$3
 BASEFOLDER='/public_html'
 TARGETFOLDER='/pwgen'
 SOURCEFOLDER=`pwd`
-echo $HOST
 echo $USER
 echo $PASS
-echo $BASEFOLDER
-echo $TARGETFOLDER
+echo "ftp://"$HOST$BASEFOLDER$TARGETFOLDER
 echo $SOURCEFOLDER
 read
-lftp -f "
+lftp -e "
 open $HOST
 user $USER $PASS
 lcd $SOURCEFOLDER
-mirror --exclude mistakes.txt --exclude config_db.php --exclude upload.sh --exclude .git/ --reverse --delete --verbose $SOURCEFOLDER $BASEFOLDER$TARGETFOLDER
+mirror --exclude mistakes.txt --exclude config_db.php --exclude upload.sh --exclude .git/ --exclude .gitignore --exclude pwgen_1.sql --exclude pwgen_2.sql --exclude pwgen_3.sql --reverse --delete --verbose $SOURCEFOLDER $BASEFOLDER$TARGETFOLDER
+bye
 "
