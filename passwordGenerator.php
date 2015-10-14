@@ -31,7 +31,6 @@ if (!empty($_GET)){
 
   $pwgen = new passwordGenerator($passwordsCount,$wordsCount,$digitsCount,$charactersCount,$upperCaseLetter,$transliterate);
 
-
   switch ($format) {
     case "html":
       header("Content-Type: text/html; charset=utf-8");
@@ -81,7 +80,7 @@ if (!empty($_GET)){
       }
       $pwgen->escape();
       $pwgen->printPreHTML();
-    }
+  }
 } else {
   header("Content-Type: text/plain; charset=utf-8");
   $pwgen = new passwordGenerator(5,3,0,3,False,False);

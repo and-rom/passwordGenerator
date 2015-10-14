@@ -17,10 +17,10 @@ error_reporting(0);
 $config = isset($_POST['only_config']);
 if (!empty($_POST)) {
   if (!empty($_POST['dbhost']) & !empty($_POST['dbuser']) & !empty($_POST['dbpass']) & !empty($_POST['dbname'])) {
-      $dbhost = $_POST['dbhost'];
-      $dbname = $_POST['dbname'];
-      $dbuser = $_POST['dbuser'];
-      $dbpass = $_POST['dbpass'];
+    $dbhost = $_POST['dbhost'];
+    $dbname = $_POST['dbname'];
+    $dbuser = $_POST['dbuser'];
+    $dbpass = $_POST['dbpass'];
     if (file_exists("config_db.php") and !$config) {
       $link = mysqli_connect($dbhost, $dbuser, $dbpass) or die("Ошибка соединения: " . mysqli_error($link));
       mysqli_set_charset($link,"utf8") or die("Ошибка: " . mysqli_error($link));
@@ -28,13 +28,15 @@ if (!empty($_POST)) {
       echo "Соединение установлено с " . mysqli_get_host_info ($link) . ".<br />";
       echo "Открываем SQL файл...<br />";
       $sql = file_get_contents("./pwgen.sql");
-      if (!$sql) {die ("Ошибка открытия SQL файла.");}
+      if (!$sql) {
+        die ("Ошибка открытия SQL файла.");
+      }
       echo "Обрабатываем SQL файл...<br />";
       mysqli_multi_query($link,$sql) or die("Ошибка: " . mysqli_error($link));
       mysqli_close($link);
       echo "Готово.<br />";
       $config = True;
-    } 
+    }
     if ($config) {
       echo "Открываем файл настроек...<br />";
       $file = fopen("config_db.php","w") or die("Ошибка открытия файла настроек.");
