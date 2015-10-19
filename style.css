@@ -19,6 +19,10 @@ input[type="number"] {
   width: 100%;
 }
 
+.passwords td, .passwords th {
+  border: 1px solid black;
+}
+
 .highlight {
   color: red;
 }
