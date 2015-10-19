@@ -71,9 +71,22 @@ xmlhttp.onreadystatechange=function() {
       }
 
       var table = document.createElement('table');
-      table.setAttribute('class', 'passwords');
+      table.setAttribute('class', 'passwords table');
       table.setAttribute('border', '1');
       table.setAttribute('id', 'passwords-table');      
+
+      var table_head = document.createElement('thead');
+      table.appendChild(table_body);
+
+      var tr = document.createElement('tr');
+      table_head.appendChild(tr);
+
+      var th0 = document.createElement('th');
+      th0.innerHTML = "№";
+      var th1 = document.createElement('th');
+      th1.innerHTML = "Пароль";
+      var th2 = document.createElement('th');
+      th2.innerHTML = "Фраза";
 
       var table_body = document.createElement('tbody');
 
