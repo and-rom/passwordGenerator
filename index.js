@@ -76,7 +76,7 @@ xmlhttp.onreadystatechange=function() {
       table.setAttribute('id', 'passwords-table');      
 
       var table_head = document.createElement('thead');
-      table.appendChild(table_body);
+      table.appendChild(table_head);
 
       var tr = document.createElement('tr');
       table_head.appendChild(tr);
@@ -87,6 +87,10 @@ xmlhttp.onreadystatechange=function() {
       th1.innerHTML = "Пароль";
       var th2 = document.createElement('th');
       th2.innerHTML = "Фраза";
+
+      tr.appendChild(th0);
+      tr.appendChild(th1);
+      tr.appendChild(th2);
 
       var table_body = document.createElement('tbody');
 
