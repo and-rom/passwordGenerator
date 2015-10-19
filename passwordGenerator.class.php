@@ -218,14 +218,12 @@ class passwordGenerator {
 
   public function highlight ($highlighter_s = "_",$highlighter_f = "_") {
     for ($i = 0; $i < count($this->passwords); $i++) {
-      $sentence = $this->passwords[$i]['sentence'];
-      $words = explode(" ", $sentence);
+      $words = explode(" ", $this->passwords[$i]['sentence']);
       for ($j = 0; $j < count($words); $j++) {
         if (preg_match('/^[0-9]+$/', $words[$j])) {
           $words[$j] = $highlighter_s . $words[$j] . $highlighter_f;
         } else {
-          $words[$j] = mb_substr($words[$j], 0, $this->charactersCount).$highlighter_f.mb_substr($words[$j], $this->charactersCount);
-          $words[$j] = $highlighter_s . $words[$j];
+          $words[$j] = $highlighter_s . mb_substr($words[$j], 0, $this->charactersCount).$highlighter_f.mb_substr($words[$j], $this->charactersCount);
         }
       }
       $this->passwords[$i]['sentence'] = implode(" ", $words);
@@ -243,11 +241,9 @@ class passwordGenerator {
   }
 
   public function printPreHTML() {
-    $i=1;
     print  "<pre style=\"white-space: pre-wrap;\">\n";
     foreach ($this->passwords as $pair){
       print $pair['password'] . " " . $pair['sentence'] . "\n";
-      $i++;
     }
     print "</pre>\n";
   }
