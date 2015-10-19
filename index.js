@@ -37,7 +37,7 @@
           continue;
       }
     }
-    xmlhttp.open("GET","passwordGenerator.php?format=json&hl=1&"+string,true);
+    xmlhttp.open("GET","/pwgen/passwordGenerator.php?format=json&hl=1&"+string,true);
     xmlhttp.send();
   }
 
