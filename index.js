@@ -71,7 +71,7 @@ xmlhttp.onreadystatechange=function() {
       }
 
       var table = document.createElement('table');
-      table.setAttribute('class', 'passwords table');
+      table.setAttribute('class', 'passwords table table-striped table-condensed');
       table.setAttribute('border', '1');
       table.setAttribute('id', 'passwords-table');      
 
