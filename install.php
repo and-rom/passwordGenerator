@@ -21,7 +21,7 @@ if (!empty($_POST)) {
     $dbname = $_POST['dbname'];
     $dbuser = $_POST['dbuser'];
     $dbpass = $_POST['dbpass'];
-    if (file_exists("config_db.php") and !$config) {
+    if (!file_exists("config_db.php") and !$config) {
       $link = mysqli_connect($dbhost, $dbuser, $dbpass) or die("Ошибка соединения: " . mysqli_error($link));
       mysqli_set_charset($link,"utf8") or die("Ошибка: " . mysqli_error($link));
       mysqli_select_db($link,$dbname) or die("Ошибка: " . mysqli_error($link));
