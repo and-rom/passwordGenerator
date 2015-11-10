@@ -72,7 +72,7 @@ if (empty($_POST) | !isset($ok)) {
 	<fieldset>
 	  <legend>Пользователь</legend>
 	  <label for="dbuser">Имя: </label><input id="dbuser" type="text" name="dbuser"/><br />
-	  <label for="dbpass">сПароль: </label><input id="dbpass" type="password" name="dbpass"/>
+	  <label for="dbpass">Пароль: </label><input id="dbpass" type="password" name="dbpass"/>
 	</fieldset>
 	<fieldset>
 	  <legend>База данных</legend>
