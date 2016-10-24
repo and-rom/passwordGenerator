@@ -25,7 +25,7 @@ if (!empty($_GET)){
 
   $passwordsCount = ($passwordsCount>=1 && $passwordsCount<=50 ? $passwordsCount : 5 );
 
-  $wordsCount = ($wordsCount>=3 && $wordsCount<=5 ? $wordsCount : 3 );
+  $wordsCount = ($wordsCount>=1 && $wordsCount<=5 ? $wordsCount : 3 );
   $digitsCount = ($digitsCount>=0 && $digitsCount<=4 ? $digitsCount : 0 );
   $charactersCount = ($charactersCount>=2 && $charactersCount<=4 ? $charactersCount : 3 );
 

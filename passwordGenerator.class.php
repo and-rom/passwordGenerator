@@ -52,18 +52,21 @@ class passwordGenerator {
       $ps_type = $this->getPluralType($number);
       $subject = $this->getSubject($ps_type);
       $words[1] = $subject['word'];
-      $predicate = $this->getPredicate($subject['ps'],($subject['ps'] == "p" ? "-" : $subject['g']));
-      $words[2] = $predicate['word'];
-      $object = $this->getObject();
-      $words[4] = $object['word'];
-      if ($this->wordsCount == 4 or $this->wordsCount == 5) {
+      if ($this->wordsCount == 2 or $this->wordsCount == 4 or $this->wordsCount == 5) {
         $attribute1 = $this->getAttribute1($ps_type,($ps_type == 2 ? "-" : $subject['g']));
         $words[0] = $attribute1['word'];
+      }
+      if ($this->wordsCount == 3 or $this->wordsCount == 4 or $this->wordsCount == 5) {
+        $predicate = $this->getPredicate($subject['ps'],($subject['ps'] == "p" ? "-" : $subject['g']));
+        $words[2] = $predicate['word'];
+        $object = $this->getObject();
+        $words[4] = $object['word'];
       }
       if ($this->wordsCount == 5) {
         $attribute2 = $this->getAttribute2($object['ps'],$object['g'],$object['alt_case']);
         $words[3] = $attribute2['word'];
       }
+
       ksort($words);
       $sentence = array();
       if ($number > 1) {
