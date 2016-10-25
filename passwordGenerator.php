@@ -7,7 +7,7 @@ if (!empty($_GET)){
   $highlight      = (isset($_GET['hl']) ? ((bool)$_GET['hl'] ? $_GET['hl'] : False) : False);
   $passwordsCount = (isset($_GET['pc']) ? $_GET['pc'] : 5);
 
-  if (isset($_GET['args']) and !empty(isset($_GET['args']))) {
+  if (isset($_GET['args']) and !empty($_GET['args'])) {
     $args = str_split($_GET['args']);
 
     $wordsCount = (isset($args[0]) ? $args[0] : 3);
