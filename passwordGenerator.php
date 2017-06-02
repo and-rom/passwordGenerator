@@ -51,7 +51,7 @@ if (!empty($_GET)){
         $after = ($highlight == 1 ? "_" : (isset(str_split($highlight)[1]) ? str_split($highlight)[1] : str_split($highlight)[0]));
         $pwgen->highlight($before,$after);
       }
-      $pwgen->escape();
+      //$pwgen->escape();
       $pwgen->printPure();
       break;
     case "json":
