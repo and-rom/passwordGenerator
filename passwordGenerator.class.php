@@ -138,7 +138,7 @@ class passwordGenerator {
 
   private function dbQuery($query) {
     $result = mysqli_query($this->link,$query) or die("Query failed" . mysqli_error($this->link));
-    $row = mysqli_fetch_array($result,MYSQL_ASSOC);
+    $row = mysqli_fetch_array($result,MYSQLI_ASSOC);
     return $row;
   }
 
