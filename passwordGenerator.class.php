@@ -37,7 +37,7 @@ class passwordGenerator {
   private function connect() {
     $this->link = mysqli_connect(DBHOST, DBUSER, DBPASS) or die("Connection error: " . mysqli_error($this->link));
     mysqli_set_charset($this->link,"utf8") or die("Error: " . mysqli_error($this->link));
-    mysqli_select_db($this->link,DBNAME) or die("Error: " . mysqli_error($lhis->link));
+    mysqli_select_db($this->link,DBNAME) or die("Error: " . mysqli_error($this->link));
   }
 
   public function generate() {
