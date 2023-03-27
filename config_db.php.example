@@ -1,0 +1,6 @@
+<?php
+  define("DBHOST", "dbhost");
+  define("DBUSER", "dbuser");
+  define("DBPASS", "dbpass");
+  define("DBNAME", "dbname");
+?>
