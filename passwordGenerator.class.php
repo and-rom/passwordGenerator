@@ -2,6 +2,11 @@
 include_once('config_db.php');
 mb_internal_encoding("UTF-8");
 
+require_once 'vendor/autoload.php';
+
+use ZxcvbnPhp\Zxcvbn;
+
+
 class passwordGenerator {
 
   private $wordsCount;
@@ -233,7 +238,16 @@ class passwordGenerator {
     }
   }
 
-  public function printJSON() {
+  public function entropy () {
+    $zxcvbn = new Zxcvbn();
+    for($i = 0; $i < count($this->passwords);$i++) {
+      $zxcvbnRes = $zxcvbn->passwordStrength($this->passwords[$i]['password']);
+      $this->passwords[$i]['entropy'] = $zxcvbnRes['entropy'];
+    }
+  }
+
+   public function printJSON() {
+    $this->entropy();
     print json_encode($this->passwords,JSON_UNESCAPED_UNICODE);
   }
 
